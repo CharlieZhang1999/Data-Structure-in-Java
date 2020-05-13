@@ -1,7 +1,7 @@
 public class NBody {
 	//public final class In extends Object;
 	//public int num_of_planets;
-	public static String starfieldimg = "images/starfield.jpg";
+	private static String starfieldimg = "images/starfield.jpg";
 	public static double readRadius(String filepath) {
 		In in = new In(filepath);
 		int num_of_planets = in.readInt();
