@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 
 The goal of this project is to give you a crash course in Java. Since CS61B is not intended to be a course about Java, we will be moving quickly, learning fundamental aspects of the Java language in just four weeks.
 
