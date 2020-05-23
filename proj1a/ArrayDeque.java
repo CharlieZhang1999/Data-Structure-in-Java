@@ -63,13 +63,10 @@ public class ArrayDeque<T> {
         return array[index];
     }
 
-    public void resize(int length){
+    private void resize(int length){
         T[] a = (T[]) new Object[length];
         System.arraycopy(array, 0, a, 0, size);
         array = a;
     }
 
-    public int getArray(){
-        return array.length;
-    }
 }
