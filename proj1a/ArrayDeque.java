@@ -41,7 +41,17 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque(){
-        for(int i = 0; i < this.size(); i++){
+        /*for(int i = 0; i < this.size(); i++){
+            System.out.println(array[i]);
+        }*/
+        //for the first part
+        for(int i = front + 1; i < array.length; i++){
+            System.out.println(array[i]);
+        }
+        System.out.println(array[0]);
+
+        //for the last part
+        for(int i = 1; i < last; i++){
             System.out.println(array[i]);
         }
     }

@@ -35,7 +35,7 @@ public class LinkedListDeque<T> {
 
     }*/
     public void addFirst(T x){
-        StuffNode first  =  new StuffNode(x, sentinel);
+        StuffNode first  =  new StuffNode(x, sentinel.next);
         sentinel.next.prev = first;
         sentinel.next = first;
         first.prev = sentinel;
