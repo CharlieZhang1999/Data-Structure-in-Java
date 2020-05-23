@@ -8,27 +8,40 @@ public class ArrayDeque<T> {
         array = (T[]) new Object[8];
         size = 0;
         front = 0;
-        last = 1;
+        last = 0;
     }
     public void addFirst(T x){
         if(size == array.length){
             resize(array.length*2);
         }
+        if(isEmpty()){
+            array[front] = x;
+        }
+        else{
+            front = front - 1;
+            if (front<0){
+                front = front + array.length;
+            }
+        }
         array[front] = x;
         size = size + 1;
-        front = front - 1;
-        if (front<0){
-            front = front + array.length;
-        }
+
     }
     public void addLast(T x){
-         if(size == array.length){
+
+        if(size == array.length){
              resize(array.length*2);
          }
-        last = last % array.length;//to keep the last in the range
-         array[last] = x;
-         size = size + 1;
-         last = last + 1;
+        if(isEmpty()){
+            array[last] = x;
+        }
+        else {
+            last = last + 1;
+            last = last % array.length;//to keep the last in the range
+        }
+        array[last] = x;
+        size = size + 1;
+
 
     }
     public boolean isEmpty(){
@@ -56,17 +69,23 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst(){
-        T t =  array[(front+1+array.length)%array.length];
-        array[(front+1+array.length)%array.length] = null;
-        front = (front + 1 + array.length) % array.length;
+        T t =  array[front%array.length];
+        array[front] = null;
         size = size - 1;
+        if(!isEmpty()) {
+            front = (front + 1) % array.length;
+        }
+
         return t;
     }
     public T removeLast(){
-        T t =  array[last-1];
-        array[last-1] = null;
-        last = (last - 1) % array.length;
+        T t =  array[last];
+        array[last] = null;
         size = size - 1;
+        if(!isEmpty()) {
+            last = (last - 1);
+        }
+
         return t;
     }
     public T get(int index){
