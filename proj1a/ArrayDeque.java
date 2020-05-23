@@ -1,30 +1,35 @@
-public class ArrayDeque<Heels> {
-    private Heels [] array;
+public class ArrayDeque<T> {
+    private T[] array;
 
     //the index of front and last
     private int front, last;
     private int size;
     public ArrayDeque(){
-        array = (Heels[]) new Object[8];
+        array = (T[]) new Object[8];
         size = 0;
         front = 0;
         last = 1;
     }
-    public void addFirst(Heels x){
+    public void addFirst(T x){
         if(size == array.length){
             resize(array.length*2);
         }
         array[front] = x;
         size = size + 1;
         front = front - 1;
+        if (front<0){
+            front = front + array.length;
+        }
     }
-    public void addLast(Heels x){
+    public void addLast(T x){
          if(size == array.length){
              resize(array.length*2);
          }
+        last = last % array.length;//to keep the last in the range
          array[last] = x;
          size = size + 1;
          last = last + 1;
+
     }
     public boolean isEmpty(){
         if(size==0){
@@ -40,27 +45,31 @@ public class ArrayDeque<Heels> {
             System.out.println(array[i]);
         }
     }
-    public Heels removeFirst(){
-        front = front + 1;
-        Heels heels = array[front];
-        array[front] = null;
+    public T removeFirst(){
+        T t =  array[(front+1+array.length)%array.length];
+        array[(front+1+array.length)%array.length] = null;
+        front = (front + 1 + array.length) % array.length;
         size = size - 1;
-        return heels;
+        return t;
     }
-    public Heels removeLast(){
-        last = last - 1;
-        Heels heels = array[last];
-        array[last] = null;
+    public T removeLast(){
+        T t =  array[last-1];
+        array[last-1] = null;
+        last = (last - 1) % array.length;
         size = size - 1;
-        return heels;
+        return t;
     }
-    public Heels get(int index){
+    public T get(int index){
         return array[index];
     }
 
     public void resize(int length){
-        Heels[] a = (Heels[]) new Object[length];
+        T[] a = (T[]) new Object[length];
         System.arraycopy(array, 0, a, 0, size);
         array = a;
+    }
+
+    public int getArray(){
+        return array.length;
     }
 }

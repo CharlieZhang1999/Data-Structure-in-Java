@@ -94,9 +94,20 @@ public class LinkedListDequeTest {
 	}
 
 	public static void Arraytest(){
-		ArrayDeque<String> ad = new ArrayDeque<String>();
-		System.out.println(ad.isEmpty());
-		ad.addLast("Roger");
-		System.out.println(ad.isEmpty());
+		ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+		ad.addFirst(0);
+		ad.addLast(1);
+		ad.removeFirst();
+		ad.addLast(2);
+		ad.addLast(3);
+		ad.removeLast();
+		ad.addLast(4);
+		ad.addLast(5);
+		ad.addLast(6);
+		ad.addLast(7);
+		ad.addLast(8);
+		ad.addLast(9);
+		ad.printDeque();
+		System.out.println(ad.getArray());
 	}
 } 

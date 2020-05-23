@@ -1,10 +1,10 @@
-public class LinkedListDeque<Heels> {
+public class LinkedListDeque<T> {
     public class StuffNode {
-        public Heels first;
+        public T first;
         public StuffNode next;
         public StuffNode prev;
 
-        public StuffNode(Heels x, StuffNode n){
+        public StuffNode(T x, StuffNode n){
             first = x;
             next = n;
         }
@@ -34,7 +34,7 @@ public class LinkedListDeque<Heels> {
         size = 1;
 
     }*/
-    public void addFirst(Heels x){
+    public void addFirst(T x){
         StuffNode first  =  new StuffNode(x, sentinel);
         sentinel.next.prev = first;
         sentinel.next = first;
@@ -42,7 +42,7 @@ public class LinkedListDeque<Heels> {
         size = size + 1;
     }
 
-    public void addLast(Heels x){
+    public void addLast(T x){
         StuffNode last = new StuffNode(x, sentinel);
         last.prev = sentinel.prev;
         sentinel.prev.next = last;
