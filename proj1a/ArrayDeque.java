@@ -13,8 +13,10 @@ public class ArrayDeque<T> {
     public void addFirst(T x){
         if(size == array.length){
             resize(array.length*2);
+            front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
+            last = size - 1;//last becomes 7
         }
-        if(isEmpty()){
+        else if(isEmpty()){
             front = front;
 
         }
@@ -30,9 +32,14 @@ public class ArrayDeque<T> {
     public void addLast(T x){
 
         if(size == array.length){
-             resize(array.length*2);
+            resize(array.length*2);
+            front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
+            last = size - 1;//last becomes 7
+
+            last = last + 1;//fill in the next to last spot
+            last = last % array.length;//to keep the last in the range
          }
-        if(isEmpty()){
+        else if(isEmpty()){
             last = last;
         }
         else {
@@ -58,18 +65,18 @@ public class ArrayDeque<T> {
             System.out.println(array[i]);
         }*/
         //for the first part
-        for(int i = front + 1; i < array.length; i++){
+        for(int i = front; i < array.length; i++){
             System.out.println(array[i]);
         }
         System.out.println(array[0]);
 
         //for the last part
-        for(int i = 1; i < last; i++){
+        for(int i = 1; i < last+1; i++){
             System.out.println(array[i]);
         }
     }
     public T removeFirst(){
-        if(!isEmpty()){
+        if(isEmpty()){
             return null;
         }
         T t =  array[front%array.length];
@@ -82,7 +89,7 @@ public class ArrayDeque<T> {
         return t;
     }
     public T removeLast(){
-        if(!isEmpty()){
+        if(isEmpty()){
             return null;
         }
         T t =  array[last];

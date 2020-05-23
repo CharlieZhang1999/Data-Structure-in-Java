@@ -108,12 +108,18 @@ public class LinkedListDequeTest {
 	}
 	public static void Arraytest(){
 		ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
-		ad.addLast(0);
-		ad.removeLast();
-		ad.addLast(2);
-		ad.removeFirst();
+		ad.addFirst(0);
+		ad.addFirst(1);
+		ad.addFirst(2);
+		ad.addFirst(3);
 		ad.addFirst(4);
-		System.out.println(ad.get(0));
+		ad.addFirst(5);
+		ad.addFirst(6);
+		ad.addFirst(7);
+		ad.addFirst(8);
+		ad.addFirst(9);
+		ad.printDeque();
+		//System.out.println(ad.removeLast());
 
 
 
