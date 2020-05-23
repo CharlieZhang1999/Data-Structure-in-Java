@@ -15,14 +15,14 @@ public class ArrayDeque<T> {
             resize(array.length*2);
         }
         if(isEmpty()){
-            array[front] = x;
+            front = front;
+
         }
         else{
             front = front - 1;
-            if (front<0){
-                front = front + array.length;
+            front = (front + array.length) % array.length;
             }
-        }
+
         array[front] = x;
         size = size + 1;
 
@@ -33,7 +33,7 @@ public class ArrayDeque<T> {
              resize(array.length*2);
          }
         if(isEmpty()){
-            array[last] = x;
+            last = last;
         }
         else {
             last = last + 1;
@@ -69,6 +69,9 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst(){
+        if(!isEmpty()){
+            return null;
+        }
         T t =  array[front%array.length];
         array[front] = null;
         size = size - 1;
@@ -79,11 +82,15 @@ public class ArrayDeque<T> {
         return t;
     }
     public T removeLast(){
+        if(!isEmpty()){
+            return null;
+        }
         T t =  array[last];
         array[last] = null;
         size = size - 1;
         if(!isEmpty()) {
-            last = (last - 1);
+            last = last - 1;
+            last = (last + array.length) % array.length;
         }
 
         return t;
