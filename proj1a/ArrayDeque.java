@@ -11,14 +11,14 @@ public class ArrayDeque<T> {
         nextLast = 5;
     }
 
-    public int minusOne(int index){
+    private int minusOne(int index){
         if(index==0){
             return array.length-1;
         }
         return index - 1;
     }
 
-    public int plusOne(int index){
+    private int plusOne(int index){
         if(index == array.length - 1){
             return 0;
         }
@@ -69,6 +69,9 @@ public class ArrayDeque<T> {
         T item =  array[plusOne(nextFirst)];
         nextFirst = plusOne(nextFirst);
         size = size - 1;
+        if(size < array.length/4 & array.length > 16){
+            resize(size * 2);
+        }
         return item;
     }
     public T removeLast(){
@@ -78,6 +81,9 @@ public class ArrayDeque<T> {
         T item =  array[minusOne(nextLast)];
         nextLast = minusOne(nextLast);
         size = size - 1;
+        if(size < array.length/4 & array.length > 16){
+            resize(size * 2);
+        }
         return item;
     }
     public T get(int index){
