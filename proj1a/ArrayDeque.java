@@ -92,11 +92,15 @@ public class ArrayDeque<T> {
     }
 
     private void resize(int length){
-        T[] a = (T[]) new Object[length];
-        System.arraycopy(array, 0, a, 0, size);
-        array = a;
-        nextFirst = array.length - 1;
+        T[] a = (T []) new Object[length];
+        int pos = this.plusOne(nextFirst);
+        for (int i = 0; i < size; i++) {
+            a[i] = array[pos];
+            pos = this.plusOne(pos);
+        }
         nextLast = size;
+        nextFirst = length - 1;
+        array = a;
 
     }
 

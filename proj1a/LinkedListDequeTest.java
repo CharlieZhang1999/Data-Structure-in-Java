@@ -89,7 +89,7 @@ public class LinkedListDequeTest {
 	public static void main(String[] args) {
 		/*System.out.println("Running tests.\n");
 		addIsEmptySizeTest();*/
-		ArrayremoveandaddTest();
+		ArraygetTest();
 	}
 
 	public static void LinkedListtest(){
@@ -119,6 +119,31 @@ public class LinkedListDequeTest {
 
 		printTestStatus(passed);
 	}
+	public static void ArraygetTest(){
+		ArrayDeque<Integer> ArrayDeque = new ArrayDeque<Integer>();
+		ArrayDeque.addLast(0);
+		ArrayDeque.addFirst(1);
+		ArrayDeque.removeFirst();
+		ArrayDeque.addFirst(3);
+		ArrayDeque.addLast(4);
+		System.out.println(ArrayDeque.removeFirst());
+		ArrayDeque.addFirst(6);
+		System.out.println(ArrayDeque.removeLast());
+		ArrayDeque.addFirst(8);
+		ArrayDeque.addFirst(9);
+		ArrayDeque.addFirst(10);
+		ArrayDeque.addLast(11);
+		ArrayDeque.addLast(12);
+		System.out.println(ArrayDeque.get(1));    // ==> 9
+		ArrayDeque.addFirst(14);
+		System.out.println(ArrayDeque.get(1));    // ==> 10
+		System.out.println(ArrayDeque.removeFirst());//    ==> 14
+		ArrayDeque.addLast(17);
+		ArrayDeque.addFirst(18);
+		ArrayDeque.addLast(19);
+		System.out.println(ArrayDeque.removeFirst());//     ==> 18
+		System.out.println(ArrayDeque.removeFirst());//     ==> 17
+	}
 	public static void Arraytest(){
 		ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
 		ad.addFirst(0);
@@ -132,7 +157,7 @@ public class LinkedListDequeTest {
 		ad.addFirst(8);
 		ad.addFirst(9);
 		ad.printDeque();
-		/*ad.removeFirst();
+		ad.removeFirst();
 		ad.removeFirst();
 		ad.removeFirst();
 		ad.removeFirst();
@@ -146,6 +171,7 @@ public class LinkedListDequeTest {
 		ad.addFirst(1);
 		ad.addFirst(2);
 		ad.addFirst(3);
+		System.out.println("the new deque");
 		ad.printDeque();
 
 		//System.out.println(ad.removeLast());*/
