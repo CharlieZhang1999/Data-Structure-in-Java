@@ -13,6 +13,7 @@ public class ArrayDeque<T> {
     public void addFirst(T x){
         if(size == array.length){
             resize(array.length*2);
+            front = 0; //move the front pointer to the 0-index
             //since all the eg. first 8 fields are occupied, now front becomes 15
         }
 
@@ -33,6 +34,7 @@ public class ArrayDeque<T> {
 
         if(size == array.length){
             resize(array.length*2);
+            front = 0; //move the front pointer to the 0-index
          }
 
         if(isEmpty()){
@@ -57,11 +59,16 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque(){
+        for(int i = 0; i < this.size(); i++){
+            int idx = (i + front) % array.length;
+            System.out.println(array[idx]);
+        }
         /*for(int i = 0; i < this.size(); i++){
             System.out.println(array[i]);
         }*/
         //for the first part
 
+        /*
         if (front > 0) {
             for(int i = front; i < array.length; i++){
                 System.out.println(array[i]);
@@ -71,7 +78,7 @@ public class ArrayDeque<T> {
         //for the last part
         for(int i = 1; i < last+1; i++){
             System.out.println(array[i]);
-        }
+        }*/
     }
     public T removeFirst(){
         if(isEmpty()){
