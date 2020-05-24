@@ -2,51 +2,48 @@ public class ArrayDeque<T> {
     private T[] array;
 
     //the index of front and last
-    private int front, last;
+    private int nextFirst, nextLast;
     private int size;
     public ArrayDeque(){
         array = (T[]) new Object[8];
         size = 0;
-        front = 0;
-        last = 0;
+        nextFirst = 4;
+        nextLast = 5;
     }
+
+    public int minusOne(int index){
+        if(index==0){
+            return array.length-1;
+        }
+        return index - 1;
+    }
+
+    public int plusOne(int index){
+        if(index == array.length - 1){
+            return 0;
+        }
+        return index + 1;
+    }
+
     public void addFirst(T x){
         if(size == array.length){
-            resize(array.length*2);
-            front = 0; //move the front pointer to the 0-index
-            //since all the eg. first 8 fields are occupied, now front becomes 15
+            resize(size*2);
         }
-
-        if(isEmpty()){
-            front = front;
-
-        }
-        else{
-            front = front - 1;
-            front = (front + array.length) % array.length;
-            }
-
-        array[front] = x;
+        array[nextFirst] = x;
         size = size + 1;
+        nextFirst = minusOne(nextFirst);
 
     }
     public void addLast(T x){
 
         if(size == array.length){
-            resize(array.length*2);
-            front = 0; //move the front pointer to the 0-index
+            resize(size*2);
          }
 
-        if(isEmpty()){
-            last = last;
-        }
-        else {
-            last = last + 1;
-            last = last % array.length;//to keep the last in the range
-        }
-        array[last] = x;
-        size = size + 1;
 
+        array[nextLast] = x;
+        size = size + 1;
+        nextLast = plusOne(nextLast);
 
     }
     public boolean isEmpty(){
@@ -59,64 +56,48 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque(){
-        for(int i = 0; i < this.size(); i++){
-            int idx = (i + front) % array.length;
-            System.out.println(array[idx]);
+        int index = this.plusOne(nextFirst);
+        for (int i = 0; i < size; i++) {
+            System.out.print(array[index] + " ");
+            index = this.plusOne(index);
         }
-        /*for(int i = 0; i < this.size(); i++){
-            System.out.println(array[i]);
-        }*/
-        //for the first part
-
-        /*
-        if (front > 0) {
-            for(int i = front; i < array.length; i++){
-                System.out.println(array[i]);
-            }
-        }
-        System.out.println(array[0]);
-        //for the last part
-        for(int i = 1; i < last+1; i++){
-            System.out.println(array[i]);
-        }*/
     }
     public T removeFirst(){
         if(isEmpty()){
             return null;
         }
-        front = front % array.length;
-        T t =  array[front];
-        array[front] = null;
+        T item =  array[plusOne(nextFirst)];
+        nextFirst = plusOne(nextFirst);
         size = size - 1;
-        if(!isEmpty()) {
-            front = (front + 1) % array.length;
-        }
-
-        return t;
+        return item;
     }
     public T removeLast(){
         if(isEmpty()){
             return null;
         }
-        T t =  array[last];
-        array[last] = null;
+        T item =  array[minusOne(nextLast)];
+        nextLast = minusOne(nextLast);
         size = size - 1;
-        if(!isEmpty()) {
-            last = last - 1;
-            last = (last + array.length) % array.length;
-        }
-
-        return t;
+        return item;
     }
     public T get(int index){
-        int idx = (front + index)%array.length;
-        return array[idx];
+        if (index >= size) {
+            return null;
+        }
+        int pos = plusOne(nextFirst);
+        for(int i = 0; i < index; i++){
+            pos = plusOne(pos);
+        }
+        return array[pos];
     }
 
     private void resize(int length){
         T[] a = (T[]) new Object[length];
         System.arraycopy(array, 0, a, 0, size);
         array = a;
+        nextFirst = array.length - 1;
+        nextLast = size;
+
     }
 
 }
