@@ -14,7 +14,6 @@ public class ArrayDeque<T> {
         if(size == array.length){
             resize(array.length*2);
             front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
-            last = size - 1;//last becomes 7
         }
         else if(isEmpty()){
             front = front;
@@ -34,10 +33,6 @@ public class ArrayDeque<T> {
         if(size == array.length){
             resize(array.length*2);
             front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
-            last = size - 1;//last becomes 7
-
-            last = last + 1;//fill in the next to last spot
-            last = last % array.length;//to keep the last in the range
          }
         else if(isEmpty()){
             last = last;
