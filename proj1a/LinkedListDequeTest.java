@@ -89,7 +89,7 @@ public class LinkedListDequeTest {
 	public static void main(String[] args) {
 		/*System.out.println("Running tests.\n");
 		addIsEmptySizeTest();*/
-		Arraytest();
+		LinkedListtest();
 	}
 
 	public static void LinkedListtest(){
@@ -97,14 +97,8 @@ public class LinkedListDequeTest {
 		ad.addFirst(0);
 		ad.addFirst(1);
 		ad.addFirst(2);
-		ad.addLast(3);
-		ad.addFirst(4);
-		ad.removeFirst();
-		ad.addFirst(6);
-		ad.addFirst(7);
-		ad.addFirst(8);
-		System.out.println(ad.removeFirst());
-		System.out.println(ad.removeLast());;
+		System.out.println(ad.get(1));
+
 	}
 	public static void Arraytest(){
 		ArrayDeque<Integer> ad = new ArrayDeque<Integer>();

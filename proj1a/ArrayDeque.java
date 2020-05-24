@@ -74,7 +74,8 @@ public class ArrayDeque<T> {
         if(isEmpty()){
             return null;
         }
-        T t =  array[front%array.length];
+        front = front % array.length;
+        T t =  array[front];
         array[front] = null;
         size = size - 1;
         if(!isEmpty()) {
@@ -98,7 +99,8 @@ public class ArrayDeque<T> {
         return t;
     }
     public T get(int index){
-        return array[index];
+        int idx = (front + index)%array.length;
+        return array[idx];
     }
 
     private void resize(int length){

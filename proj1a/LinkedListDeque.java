@@ -13,7 +13,7 @@ public class LinkedListDeque<T> {
             if(x==0){
                 return this.first;
             }
-            return this.goRecursive(x-1);
+            return this.next.goRecursive(x-1);
         }
     }
     private StuffNode sentinel;
