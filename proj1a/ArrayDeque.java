@@ -13,9 +13,10 @@ public class ArrayDeque<T> {
     public void addFirst(T x){
         if(size == array.length){
             resize(array.length*2);
-            front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
+            //since all the eg. first 8 fields are occupied, now front becomes 15
         }
-        else if(isEmpty()){
+
+        if(isEmpty()){
             front = front;
 
         }
@@ -32,9 +33,9 @@ public class ArrayDeque<T> {
 
         if(size == array.length){
             resize(array.length*2);
-            front = array.length-1;//since all the eg. first 8 fields are occupied, now front becomes 15
          }
-        else if(isEmpty()){
+
+        if(isEmpty()){
             last = last;
         }
         else {
@@ -60,11 +61,13 @@ public class ArrayDeque<T> {
             System.out.println(array[i]);
         }*/
         //for the first part
-        for(int i = front; i < array.length; i++){
-            System.out.println(array[i]);
+
+        if (front > 0) {
+            for(int i = front; i < array.length; i++){
+                System.out.println(array[i]);
+            }
         }
         System.out.println(array[0]);
-
         //for the last part
         for(int i = 1; i < last+1; i++){
             System.out.println(array[i]);
