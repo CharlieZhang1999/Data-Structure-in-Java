@@ -69,14 +69,35 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Bound
     }
 
     // TODO: When you get to part 5, implement the needed code to support iteration.
-    public int plusOne(int index){
+    private int plusOne(int index){
         if(index == capacity - 1){
             return 0;
         }
         return index + 1;
     }
+    public Iterator<T> iterator(){
+        return new KeyIterator();
+    }
 
+    private class KeyIterator implements Iterator<T>{
+        private int next_position;
+        public KeyIterator(){
+            next_position = 0;
+        }
 
+        public boolean hasNext(){
+            if(next_position < fillCount){
+                return true;
+            }
+            return false;
+        }
+
+        public T next(){
+            T ret = rb[next_position];
+            next_position += 1;
+            return ret;
+        }
+    }
 
 
 }
