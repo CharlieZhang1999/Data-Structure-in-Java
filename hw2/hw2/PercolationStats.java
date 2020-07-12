@@ -42,9 +42,9 @@ public class PercolationStats {
     }                              // high endpoint of 95% confidence interval
 
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         PercolationFactory pf = new PercolationFactory();
         PercolationStats ps = new PercolationStats(10, 30, pf);
         System.out.println(ps.mean());
-    }
+    }*/
 }
