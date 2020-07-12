@@ -4,7 +4,7 @@ import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 public class PercolationStats {
     private Percolation perc;
-    private int t; //number of trials
+    private final int t; //number of trials
     private double threshold;
     private double data [];
 

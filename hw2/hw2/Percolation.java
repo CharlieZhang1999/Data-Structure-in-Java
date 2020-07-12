@@ -5,14 +5,16 @@ import static org.junit.Assert.*;
 public class Percolation {
     private int gridsize;
     private int num_opensites;
-    private WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF uf1;
     private boolean openslots[][];
 
     public Percolation(int N){// create N-by-N grid, with all sites initially blocked
         if(N < 0){
             throw new java.lang.IllegalArgumentException("Grid size should be greater than 0");
         }
-        this.uf = new WeightedQuickUnionUF(N*N + 2);//let the N*N be the top node, so whenever we have a full site on the top, we union this site to the top node; let the N*N + 1 be the representative of the bottom node
+        uf = new WeightedQuickUnionUF(N*N + 2);//let the N*N be the top node, so whenever we have a full site on the top, we union this site to the top node; let the N*N + 1 be the representative of the bottom node
+        uf1 = new WeightedQuickUnionUF(N*N + 1);
         openslots = new boolean[N][N];
         gridsize = N;
         num_opensites = 0;
@@ -27,23 +29,28 @@ public class Percolation {
         }
         openslots[row][col] = true;
         if(row == 0){
-            this.uf.union(to1D(row, col), gridsize * gridsize); // we union this site to the representative of the top node, which is at the N * N slot
+            uf.union(to1D(row, col), gridsize * gridsize); // we union this site to the representative of the top node, which is at the N * N slot
+            uf1.union(to1D(row, col), gridsize * gridsize);
         }
 
         if(row == gridsize - 1){
-            this.uf.union(to1D(row, col), gridsize * gridsize + 1);// we union this site to the representative of the bottom node, which is at the N * N + 1 slot
+            uf.union(to1D(row, col), gridsize * gridsize + 1);// we union this site to the representative of the bottom node, which is at the N * N + 1 slot
         }
         if(row > 0 && openslots[row - 1][col]){
-            this.uf.union(to1D(row, col), to1D(row - 1, col));
+            uf.union(to1D(row, col), to1D(row - 1, col));
+            uf1.union(to1D(row, col), to1D(row - 1, col));
         }
         if(row < gridsize - 1 && openslots[row + 1][col]){
-            this.uf.union(to1D(row, col), to1D(row + 1, col));
+            uf.union(to1D(row, col), to1D(row + 1, col));
+            uf1.union(to1D(row, col), to1D(row + 1, col));
         }
         if(col > 1 && openslots[row][col - 1]){
-            this.uf.union(to1D(row, col), to1D(row, col - 1));
+            uf.union(to1D(row, col), to1D(row, col - 1));
+            uf1.union(to1D(row, col), to1D(row, col - 1));
         }
         if(col < gridsize - 1 && openslots[row][col + 1]){
-            this.uf.union(to1D(row, col), to1D(row, col + 1));
+            uf.union(to1D(row, col), to1D(row, col + 1));
+            uf1.union(to1D(row, col), to1D(row, col + 1));
         }
         num_opensites += 1;
     }
@@ -56,8 +63,11 @@ public class Percolation {
         return openslots[row][col];
     }
     public boolean isFull(int row, int col){// is the site (row, col) full?
+        if(!isOpen(row, col)){
+            return false;
+        }
         int tranformed_to_1d = to1D(row, col);
-        if(uf.connected(gridsize * gridsize, tranformed_to_1d)){//if it's connected with the top node, it's full
+        if(uf1.connected(gridsize * gridsize, tranformed_to_1d)){//if it's connected with the top node, it's full
             return true;
         }
         return false;
