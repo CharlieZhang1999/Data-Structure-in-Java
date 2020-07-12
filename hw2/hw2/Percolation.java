@@ -76,14 +76,15 @@ public class Percolation {
         return false;
 
     }
-    public static void main(String[] args){
+    /*public static void main(String[] args){
 
         Percolation pc = new Percolation(5);
         pc.open(0, 1);
         pc.open(1, 1);
         pc.open(1, 0);
+        pc.open(1, 0);
         assertTrue(pc.isFull(1, 0));
         System.out.println(pc.percolates());
         System.out.println(pc.numberOfOpenSites());
-    }   // use for unit testing (not required)
+    }   // use for unit testing (not required)*/
 }
