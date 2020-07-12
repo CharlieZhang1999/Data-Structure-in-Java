@@ -1,7 +1,7 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-
+import static org.junit.Assert.*;
 public class Percolation {
     private int gridsize;
     private int num_opensites;
@@ -15,6 +15,7 @@ public class Percolation {
         this.uf = new WeightedQuickUnionUF(N*N + 2);//let the N*N be the top node, so whenever we have a full site on the top, we union this site to the top node; let the N*N + 1 be the representative of the bottom node
         openslots = new boolean[N][N];
         gridsize = N;
+        num_opensites = 0;
     }
 
     public void open(int row, int col){// open the site (row, col) if it is not open already
@@ -76,17 +77,13 @@ public class Percolation {
 
     }
     public static void main(String[] args){
-        /*
-        Percolation pc = new Percolation(5);
-        pc.open(0, 0);
-        pc.open(1, 0);
-        pc.open(3, 0);
-        System.out.println(pc.isFull(3, 0));
-        pc.open(2, 0);
-        pc.open(3,1);
-        pc.open(4,1);
 
+        Percolation pc = new Percolation(5);
+        pc.open(0, 1);
+        pc.open(1, 1);
+        pc.open(1, 0);
+        assertTrue(pc.isFull(1, 0));
         System.out.println(pc.percolates());
-        System.out.println(pc.numberOfOpenSites());*/
+        System.out.println(pc.numberOfOpenSites());
     }   // use for unit testing (not required)
 }

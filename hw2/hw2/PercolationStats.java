@@ -4,10 +4,9 @@ import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 public class PercolationStats {
     private Percolation perc;
-    private int r,c,t;
+    private int t; //number of trials
     private double threshold;
     private double data [];
-    private double mean, std;
 
     public PercolationStats(int N, int T, PercolationFactory pf){
         if(N <= 0 || T <= 0){
@@ -18,8 +17,8 @@ public class PercolationStats {
         for(int i = 0; i < T; i++){
             perc = pf.make(N);
             while(!perc.percolates()){
-                r = StdRandom.uniform(0, N);
-                c = StdRandom.uniform(0, N);
+                int r = StdRandom.uniform(0, N);
+                int c = StdRandom.uniform(0, N);
                 if(!perc.isOpen(r, c)){
                     perc.open(r, c);
                 }
@@ -30,24 +29,22 @@ public class PercolationStats {
 
     }   // perform T independent experiments on an N-by-N grid
     public double mean(){ // sample mean of percolation threshold
-        mean = StdStats.mean(data);
-        return mean;
+        return StdStats.mean(data);
     }
     public double stddev(){ // sample standard deviation of percolation threshold
-        std = StdStats.stddev(data);
-        return std;
+        return StdStats.stddev(data);
     }
     public double confidenceLow(){
-        return mean - 1.96 * std / Math.sqrt(t);
+        return mean() - 1.96 * stddev() / Math.sqrt(t);
     }                                  // low endpoint of 95% confidence interval
     public double confidenceHigh(){
-        return mean + 1.96 * std / Math.sqrt(t);
+        return mean() + 1.96 * stddev() / Math.sqrt(t);
     }                              // high endpoint of 95% confidence interval
 
 
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         PercolationFactory pf = new PercolationFactory();
         PercolationStats ps = new PercolationStats(10, 30, pf);
         System.out.println(ps.mean());
-    }*/
+    }
 }
